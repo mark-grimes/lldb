@@ -3309,6 +3309,7 @@ public:
                     
                     TreeItem t (&item, *m_frame_delegate_sp, false);
                     size_t num_frames = thread_sp->GetStackFrameCount();
+                    item.ClearChildren(); // Clear first so that "t" is applied to all elements in the Resize
                     item.Resize (num_frames, t);
                     for (size_t i=0; i<num_frames; ++i)
                     {
@@ -3419,6 +3420,7 @@ public:
                 ThreadList &threads = process_sp->GetThreadList();
                 Mutex::Locker locker (threads.GetMutex());
                 size_t num_threads = threads.GetSize();
+                item.ClearChildren(); // Clear first so that "t" is applied to all elements in the Resize
                 item.Resize (num_threads, t);
                 for (size_t i=0; i<num_threads; ++i)
                 {
