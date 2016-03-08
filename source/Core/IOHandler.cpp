@@ -3914,7 +3914,7 @@ public:
                 VariableList *locals = frame->GetVariableList(true);
                 if (locals)
                 {
-                    const DynamicValueType use_dynamic = eDynamicDontRunTarget;
+                    const DynamicValueType use_dynamic = eNoDynamicValues;
                     const size_t num_locals = locals->GetSize();
                     for (size_t i=0; i<num_locals; ++i)
                     {
