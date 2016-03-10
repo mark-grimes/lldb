@@ -5383,6 +5383,12 @@ public:
                     {
                         bool source_step = (c == 'n');
                         exe_ctx.GetThreadRef().StepOver(source_step);
+                        if( m_tid!=LLDB_INVALID_THREAD_ID && exe_ctx.HasProcessScope() )
+                        {
+                            ThreadList& thread_list=exe_ctx.GetProcessRef().GetThreadList();
+                            Mutex::Locker locker (thread_list.GetMutex());
+                            thread_list.SetSelectedThreadByID(m_tid);
+                        }
                     }
                 }
                 return eKeyHandled;
@@ -5395,6 +5401,12 @@ public:
                     {
                         bool source_step = (c == 's');
                         exe_ctx.GetThreadRef().StepIn(source_step);
+                        if( m_tid!=LLDB_INVALID_THREAD_ID && exe_ctx.HasProcessScope() )
+                        {
+                            ThreadList& thread_list=exe_ctx.GetProcessRef().GetThreadList();
+                            Mutex::Locker locker (thread_list.GetMutex());
+                            thread_list.SetSelectedThreadByID(m_tid);
+                        }
                     }
                 }
                 return eKeyHandled;
